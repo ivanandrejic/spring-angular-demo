@@ -48,17 +48,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/createUser").hasAnyRole("CREATE_USER", "ADMIN")
 				.anyRequest().authenticated()
 				.and()
-//			.formLogin()
-//            	.loginPage("/#/login")
-//				.and()
+			.formLogin()
+            	.loginPage("/#/login")
+				.and()
 			.httpBasic()
 				.and()
 			.csrf()
-//				.disable()
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+				.disable();
+//				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //				.and()
 //			.requiresChannel()
 //                .anyRequest().requiresSecure();
+//			.logout()
+//				.logoutSuccessUrl("/");
 	}
 
 }
