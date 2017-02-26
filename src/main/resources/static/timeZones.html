@@ -1,0 +1,63 @@
+<h1>Zones</h1>
+<div ng-show="authenticated">
+
+	<h4>Current user: {{currentUser.name}}</h4>
+	
+	<div>
+		<label for="fromDate">From date:</label>
+        <input id="fromDate" type="date" ng-model="fromDate" placeholder="yyyy-MM-dd" min="2016-01-01" max="2016-12-31">
+    </div>
+    <div>
+        <label for="toDate">To date:</label>
+        <input id="toDate" type="date" ng-model="toDate" placeholder="yyyy-MM-dd" min="2016-01-01" max="2016-12-31">
+    </div>
+
+	<br>
+	
+	<button type="button" ng-click="searchZones()" class="btn btn-sm btn-success">
+		<i class="glyphicon glyphicon-search">
+		</i> Search
+	</button>
+
+	<button type="button" ng-click="addZone()" class="btn btn-sm btn-success">
+		<i class="glyphicon glyphicon-plus">
+		</i> Add
+	</button>
+	<table st-table="zones" class="table table-striped">
+		<thead>
+			<tr>
+		        <th>Date</th>
+		        <th>Total Time</th>
+		        <th>Notes</th>
+		    </tr>
+	    </thead>
+	    <tbody>
+			<tr ng-repeat="zone in zones">
+				<td ng-show="!zone.edit">{{zone.zoneDate | date }}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.zoneDate"/></td>
+				<td ng-show="!zone.edit" ng-style="zone.totalTime == preferredWorkingHourPerDay ? {color:'red'} : {color:'green'}">{{zone.totalTime}}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.totalTime"/></td>
+				<td ng-show="!zone.edit">{{zone.note}}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.note"/></td>
+				<td>
+				<button ng-show="!zone.edit" type="button" ng-click="editZone(zone)" class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-pencil">
+					</i>
+				</button>
+				<button ng-show="!zone.edit" type="button" ng-click="removeZone(zone)" class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-remove-circle">
+					</i>
+				</button>
+				<button ng-show="zone.edit" type="button" ng-click="saveZone(zone)" class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-ok">
+					</i>
+				</button>
+				<button ng-show="zone.edit" type="button" ng-click="cancelZone(zone)" class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-remove">
+					</i>
+				</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

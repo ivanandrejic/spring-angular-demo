@@ -34,4 +34,38 @@ public class TimeZone {
 	@JoinColumn(name="USER_ID")
 	private SecureUser user;
 
+	public Date getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(Date timeZone) {
+		this.timeZone = timeZone;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public SecureUser getUser() {
+		return user;
+	}
+
+	public void setUser(SecureUser user) {
+		this.user = user;
+	}
+	
+	
+
 }
