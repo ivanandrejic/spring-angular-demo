@@ -7,3 +7,11 @@ INSERT INTO SECURE_USER (NAME, PASSWORD, ROLE) VALUES
   ('user', '$2a$10$HXI22ZmiVyz.NbWgSzye.eXvSWPPrIEhiydH6G3zjdrPA3a9rfkzm', 'ROLE_USER');
 
   
+INSERT INTO TIME_ZONE (TIME_ZONE, NAME, CITY, USER_ID) VALUES
+  ('2017-01-12 12:00:00', 'Central', 'Rome', 4),
+  ('2017-01-13 12:00:00', 'Central', 'Rome', 4),
+  ('2017-01-14 12:00:00', 'Central', 'Rome', 4),
+  ('2017-01-12 12:00:00', 'Central', 'Rome', 1),
+  ('2017-01-13 12:00:00', 'Central', 'Rome', 1),
+  ('2017-01-14 12:00:00', 'Central', 'Rome', 1);
+  
