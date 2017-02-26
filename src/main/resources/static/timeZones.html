@@ -1,15 +1,11 @@
-<h1>Zones</h1>
+<h1>Time Zones</h1>
 <div ng-show="authenticated">
 
 	<h4>Current user: {{currentUser.name}}</h4>
 	
 	<div>
-		<label for="fromDate">From date:</label>
-        <input id="fromDate" type="date" ng-model="fromDate" placeholder="yyyy-MM-dd" min="2016-01-01" max="2016-12-31">
-    </div>
-    <div>
-        <label for="toDate">To date:</label>
-        <input id="toDate" type="date" ng-model="toDate" placeholder="yyyy-MM-dd" min="2016-01-01" max="2016-12-31">
+		<label for="fromDate">Zone Name:</label>
+        <input id="fromDate" type="text" ng-model="fromDate">
     </div>
 
 	<br>
@@ -35,10 +31,6 @@
 			<tr ng-repeat="zone in zones">
 				<td ng-show="!zone.edit">{{zone.zoneDate | date }}</td>
 				<td ng-show="zone.edit"><input type="text" ng-model="zone.zoneDate"/></td>
-				<td ng-show="!zone.edit" ng-style="zone.totalTime == preferredWorkingHourPerDay ? {color:'red'} : {color:'green'}">{{zone.totalTime}}</td>
-				<td ng-show="zone.edit"><input type="text" ng-model="zone.totalTime"/></td>
-				<td ng-show="!zone.edit">{{zone.note}}</td>
-				<td ng-show="zone.edit"><input type="text" ng-model="zone.note"/></td>
 				<td>
 				<button ng-show="!zone.edit" type="button" ng-click="editZone(zone)" class="btn btn-sm btn-danger">
 					<i class="glyphicon glyphicon-pencil">

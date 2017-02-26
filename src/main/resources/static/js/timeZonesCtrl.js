@@ -1,15 +1,10 @@
 app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'authService', function($rootScope, $scope, $resource, TimeZone, authService) {
 	console.log('zones ctrl')
 	
-	$scope.fromDate = new Date('2017-01-01');
-	$scope.toDate = new Date('2017-12-31');
-	
 	$scope.searchZones = function searchZones() {
 		
 		if ($rootScope.currentUser) {
 			console.log('current user: ' + JSON.stringify($rootScope.currentUser));
-			
-			$scope.preferredWorkingHourPerDay = $rootScope.currentUser.preferredWorkingHourPerDay;
 			
 			if ($scope.fromDate && $scope.toDate) {			
 				var UserZones = $resource(getDateUrl(), 
@@ -48,7 +43,6 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     $scope.addZone = function addZone() {
         $scope.zones.push({
         	'zoneDate' : '',
-            'totalTime' : 8,
             'edit' : true,
             'newZone' : true
         });
@@ -72,9 +66,7 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     	zone.edit = false;
     	var zoneToSave = {};
     	zoneToSave.zoneDate = zone.zoneDate;
-    	zoneToSave.totalTime = zone.totalTime;
     	zoneToSave.user = 'rest/users/' + $rootScope.currentUser.id;
-    	zoneToSave.note = zone.note;
     	if (zone.newZone) {
     		TimeZone.save(null, zoneToSave, function(value) {
     			console.log('saved zone: ' + value)

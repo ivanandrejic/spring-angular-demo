@@ -64,8 +64,7 @@ app.service('authService', ['$rootScope', '$http', function($rootScope, $http) {
 		$http.post('rest/users/', {
 			name: credentials.name,
 			password: credentials.password,
-			role: 'ROLE_USER',
-			preferredWorkingHourPerDay: 8
+			role: 'ROLE_USER'
 		},
 		{
 			headers : {
