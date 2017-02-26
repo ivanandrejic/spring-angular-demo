@@ -6,7 +6,7 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
 		if ($rootScope.currentUser) {
 			console.log('current user: ' + JSON.stringify($rootScope.currentUser));
 			
-			if ($scope.fromDate && $scope.toDate) {			
+			if ($scope.byName) {			
 				var UserZones = $resource(getDateUrl(), 
 					{
 						userId: $rootScope.currentUser.id, 
@@ -42,7 +42,7 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
 	
     $scope.addZone = function addZone() {
         $scope.zones.push({
-        	'zoneDate' : '',
+        	'timeZone' : '',
             'edit' : true,
             'newZone' : true
         });
@@ -65,7 +65,7 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     	
     	zone.edit = false;
     	var zoneToSave = {};
-    	zoneToSave.zoneDate = zone.zoneDate;
+    	zoneToSave.timeZone = zone.timeZone;
     	zoneToSave.user = 'rest/users/' + $rootScope.currentUser.id;
     	if (zone.newZone) {
     		TimeZone.save(null, zoneToSave, function(value) {

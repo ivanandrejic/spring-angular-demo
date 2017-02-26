@@ -19,8 +19,6 @@
 			<tr ng-repeat="user in users">
 				<td ng-show="!user.edit">{{user.name}}</td>
 				<td ng-show="user.edit"><input type="text" ng-model="user.name"/></td>
-				<td ng-show="!user.edit">{{user.preferredWorkingHourPerDay}}</td>
-				<td ng-show="user.edit"><input type="text" ng-model="user.preferredWorkingHourPerDay"/></td>
 				<td ng-show="!user.edit">{{user.role}}</td>
 				<td ng-show="user.edit">
 					<!-- <input type="text" ng-model="user.roles"/> -->

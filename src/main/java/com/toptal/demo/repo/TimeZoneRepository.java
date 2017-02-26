@@ -1,8 +1,11 @@
 package com.toptal.demo.repo;
 
+import java.util.List;
+
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -16,6 +19,11 @@ public interface TimeZoneRepository extends PagingAndSortingRepository<TimeZone,
 	@PostAuthorize("hasRole('ROLE_ADMIN') || (returnObject != null && returnObject.user.name == authentication?.name)")
 	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
 	TimeZone findOne(@Param("id")Long id);
+	
+	@RestResource(path = "userId")
+//	@PostAuthorize("hasRole('ROLE_ADMIN') || (returnObject != null && returnObject.user.name == authentication?.name)")
+	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
+	List<TimeZone> findByUserId(@Param("userId") Long userId);
 	
 	@Override
 	@PreAuthorize("#entity?.user != null && (hasRole('ROLE_ADMIN') || #entity?.user.name == authentication?.name)")

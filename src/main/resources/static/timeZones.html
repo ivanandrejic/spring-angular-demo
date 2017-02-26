@@ -4,8 +4,8 @@
 	<h4>Current user: {{currentUser.name}}</h4>
 	
 	<div>
-		<label for="fromDate">Zone Name:</label>
-        <input id="fromDate" type="text" ng-model="fromDate">
+		<label for="byName">Zone Name:</label>
+        <input id="byName" type="text" ng-model="byName">
     </div>
 
 	<br>
@@ -22,15 +22,17 @@
 	<table st-table="zones" class="table table-striped">
 		<thead>
 			<tr>
-		        <th>Date</th>
-		        <th>Total Time</th>
+				<th>Name</th>
+		        <th>Time Zone</th>
 		        <th>Notes</th>
 		    </tr>
 	    </thead>
 	    <tbody>
 			<tr ng-repeat="zone in zones">
-				<td ng-show="!zone.edit">{{zone.zoneDate | date }}</td>
-				<td ng-show="zone.edit"><input type="text" ng-model="zone.zoneDate"/></td>
+				<td ng-show="!zone.edit">{{zone.name}}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.name"/></td>
+				<td ng-show="!zone.edit">{{ zone.timeZone | date }}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.timeZone"/></td>
 				<td>
 				<button ng-show="!zone.edit" type="button" ng-click="editZone(zone)" class="btn btn-sm btn-danger">
 					<i class="glyphicon glyphicon-pencil">
