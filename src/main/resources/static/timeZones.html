@@ -23,6 +23,7 @@
 		<thead>
 			<tr>
 				<th>Name</th>
+				<th>City</th>
 		        <th>Time Zone</th>
 		        <th>Notes</th>
 		    </tr>
@@ -31,6 +32,8 @@
 			<tr ng-repeat="zone in zones">
 				<td ng-show="!zone.edit">{{zone.name}}</td>
 				<td ng-show="zone.edit"><input type="text" ng-model="zone.name"/></td>
+				<td ng-show="!zone.edit">{{zone.city}}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.city"/></td>
 				<td ng-show="!zone.edit">{{ zone.timeZone | date }}</td>
 				<td ng-show="zone.edit"><input type="text" ng-model="zone.timeZone"/></td>
 				<td>

@@ -66,37 +66,23 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     	zone.edit = false;
     	var zoneToSave = {};
     	zoneToSave.timeZone = zone.timeZone;
-    	zoneToSave.user = 'rest/users/' + $rootScope.currentUser.id;
+    	zoneToSave.name = zone.name;
+    	zoneToSave.city = zone.city;
+    	zoneToSave.userId = zone.userId;
     	if (zone.newZone) {
+    		zoneToSave.userId = $rootScope.currentUser.id;
     		TimeZone.save(null, zoneToSave, function(value) {
     			console.log('saved zone: ' + value)
     			$scope.zones[index] = value;
     		});
     		zone.newZone = false;
     	} else {
-    		
     		zoneToSave.id = getId(zone);
-    		if (isAdmin()) {
-//    			get real user id
-    			$resource('/rest/timeZones/:zoneId/user', 
-					{zoneId:zoneToSave.id})
-					.get({ id: getId(zone) }, 
-					function (value) {
-						zoneToSave.user = 'rest/users/' + getId(value);
-						TimeZone.update({ id:zoneToSave.id }, zoneToSave, function() {
-		    				console.log('updated zone sucess');
-		    			}, function () {
-		    				console.log('updated zone error');
-		    			});
-					}
-				);
-    		} else {    			
-    			TimeZone.update({ id:zoneToSave.id }, zoneToSave, function() {
-    				console.log('updated zone sucess');
-    			}, function () {
-    				console.log('updated zone error');
-    			});
-    		}
+    		TimeZone.update({ id:zoneToSave.id }, zoneToSave, function() {
+    			console.log('updated zone sucess');
+    		}, function () {
+    			console.log('updated zone error');
+    		});
     		
     	}
     }

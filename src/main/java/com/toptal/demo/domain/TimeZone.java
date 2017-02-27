@@ -6,10 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -30,9 +26,10 @@ public class TimeZone {
 	@Column(name="CITY")
 	private String city;
 	
-	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private SecureUser user;
+//	@ManyToOne
+//	@JoinColumn(name="USER_ID")
+	@Column(name="USER_ID")
+	private Long userId;
 
 	public Date getTimeZone() {
 		return timeZone;
@@ -58,14 +55,14 @@ public class TimeZone {
 		this.city = city;
 	}
 
-	public SecureUser getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(SecureUser user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	
+
 	
 
 }

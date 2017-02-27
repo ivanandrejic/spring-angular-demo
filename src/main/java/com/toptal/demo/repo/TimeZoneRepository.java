@@ -16,7 +16,7 @@ import com.toptal.demo.domain.TimeZone;
 public interface TimeZoneRepository extends PagingAndSortingRepository<TimeZone, Long> {
 
 	@Override
-	@PostAuthorize("hasRole('ROLE_ADMIN') || (returnObject != null && returnObject.user.name == authentication?.name)")
+	@PostAuthorize("hasRole('ROLE_ADMIN') || (returnObject != null && @secureUserRepository.findOne(returnObject.userId).name == authentication?.name)")
 	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
 	TimeZone findOne(@Param("id")Long id);
 	
@@ -26,11 +26,11 @@ public interface TimeZoneRepository extends PagingAndSortingRepository<TimeZone,
 	List<TimeZone> findByUserId(@Param("userId") Long userId);
 	
 	@Override
-	@PreAuthorize("#entity?.user != null && (hasRole('ROLE_ADMIN') || #entity?.user.name == authentication?.name)")
+	@PreAuthorize("#entity?.userId != null && (hasRole('ROLE_ADMIN') || @secureUserRepository.findOne(#entity.userId).name == authentication?.name)")
 	<S extends TimeZone> S save(@Param("entity")S entity);
 	
 	@Override
-	@PreAuthorize("hasRole('ROLE_ADMIN') || (#entity?.user != null && #entity?.user.name == authentication?.name)")
+	@PreAuthorize("hasRole('ROLE_ADMIN') || (#entity?.userId != null && @secureUserRepository.findOne(#entity.userId).name == authentication?.name)")
 	void delete(@Param("entity")TimeZone entity);
 	
 }

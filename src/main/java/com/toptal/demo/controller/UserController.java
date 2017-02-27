@@ -3,6 +3,7 @@ package com.toptal.demo.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toptal.demo.domain.SecureUser;
+import com.toptal.demo.domain.TimeZone;
 import com.toptal.demo.repo.SecureUserRepository;
+import com.toptal.demo.repo.TimeZoneRepository;
 
 @RepositoryRestController
 @RequestMapping("/rest/users")
@@ -30,6 +33,9 @@ public class UserController {
 	
 	@Autowired
 	private SecureUserRepository secureUserRepo;
+	
+	@Autowired
+	private TimeZoneRepository timeZoneRepo;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER_MANAGER')")
@@ -124,6 +130,17 @@ public class UserController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody void delete(@PathVariable Long id) {
 		SecureUser oldUser = secureUserRepo.findOne(id);
+		
+//		TODO remove zones
+//		List<TimeZone> byUserId = timeZoneRepo.findByUserId(id);
+//		byUserId.stream().forEach(new Consumer<TimeZone>() {
+//
+//			@Override
+//			public void accept(TimeZone zone) {
+//				timeZoneRepo.delete(zone);
+//			}
+//		});
+		
 		secureUserRepo.delete(oldUser);
     }
 
