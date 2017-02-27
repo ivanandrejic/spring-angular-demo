@@ -21,8 +21,7 @@ public interface TimeZoneRepository extends PagingAndSortingRepository<TimeZone,
 	TimeZone findOne(@Param("id")Long id);
 	
 	@RestResource(path = "userId")
-//	@PostAuthorize("hasRole('ROLE_ADMIN') || (returnObject != null && returnObject.user.name == authentication?.name)")
-	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') || (hasRole('ROLE_USER') && @secureUserRepository.findOne(#userId).name == authentication?.name)")
 	List<TimeZone> findByUserId(@Param("userId") Long userId);
 	
 	@Override
