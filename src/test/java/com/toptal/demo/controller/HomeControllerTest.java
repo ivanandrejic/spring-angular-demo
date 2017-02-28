@@ -20,35 +20,20 @@ import com.toptal.demo.Application;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
-public class UserControllerTest {
-
+public class HomeControllerTest {
+    
 	@Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetAllAdmin() throws Exception {
-    	mockMvc.perform(get("/rest/users").with(httpBasic("admin", "toptal")))
+    public void testLogin() throws Exception {
+    	mockMvc.perform(get("/user").with(httpBasic("admin", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
+			.andExpect(content().json("{\"role\":\"ROLE_ADMIN\"}"))
 		;
     }
-    
-    @Test
-    public void testGetAllManager() throws Exception {
-    	mockMvc.perform(get("/rest/users").with(httpBasic("manager", "toptal")))
-			.andDo(print())
-			.andExpect(status().isOk())
-		;
-    }
-    
-    @Test
-    public void testGetAllUser() throws Exception {
-    	mockMvc.perform(get("/rest/users").with(httpBasic("user", "toptal")))
-			.andDo(print())
-			.andExpect(status().is4xxClientError())
-		;
-    }
-    
-    
-	
+
+	    
+	    
 }

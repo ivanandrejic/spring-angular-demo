@@ -14,12 +14,9 @@ import com.toptal.demo.repo.SecureUserRepository;
 @Component
 public class LocalUserDetailsService implements UserDetailsService {
 
-	private final SecureUserRepository userRepo;
-
 	@Autowired
-	public LocalUserDetailsService(SecureUserRepository userRepo) {
-		this.userRepo = userRepo;
-	}
+	private SecureUserRepository userRepo;
+
 
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
