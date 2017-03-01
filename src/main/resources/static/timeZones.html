@@ -24,8 +24,8 @@
 			<tr>
 				<th>Name</th>
 				<th>City</th>
-		        <th>Time Zone</th>
-		        <th>Notes</th>
+		        <th>Time Zone Offset</th>
+		        <th>Current Time</th>
 		    </tr>
 	    </thead>
 	    <tbody>
@@ -34,8 +34,9 @@
 				<td ng-show="zone.edit"><input type="text" ng-model="zone.name"/></td>
 				<td ng-show="!zone.edit">{{zone.city}}</td>
 				<td ng-show="zone.edit"><input type="text" ng-model="zone.city"/></td>
-				<td ng-show="!zone.edit">{{ zone.timeZone | date }}</td>
-				<td ng-show="zone.edit"><input type="text" ng-model="zone.timeZone"/></td>
+				<td ng-show="!zone.edit">{{ zone.offset > 0 ? '+' + zone.offset : zone.offset }}</td>
+				<td ng-show="zone.edit"><input type="text" ng-model="zone.offset"/></td>
+				<td ng-show="!zone.edit">{{ currentTime(zone) }}</td>
 				<td>
 				<button ng-show="!zone.edit" type="button" ng-click="editZone(zone)" class="btn btn-sm btn-danger">
 					<i class="glyphicon glyphicon-pencil">

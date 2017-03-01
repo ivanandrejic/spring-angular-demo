@@ -42,11 +42,22 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
 	
     $scope.addZone = function addZone() {
         $scope.zones.push({
-        	'timeZone' : '',
+        	'offset' : 0,
             'edit' : true,
             'newZone' : true
         });
     };
+    
+    $scope.currentTime = function currentTime(zone) {
+    	var index = $scope.zones.indexOf(zone);
+    	var result = '';
+        if (index !== -1 && !zone.newZone) {
+        	var current = new Date();
+        	current.setUTCHours(current.getUTCHours() + $scope.zones[index].offset);
+        	result = current;
+        }
+        return result;
+    }
 
     $scope.removeZone = function removeZone(zone) {
         var index = $scope.zones.indexOf(zone);
@@ -65,7 +76,7 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     	
     	zone.edit = false;
     	var zoneToSave = {};
-    	zoneToSave.timeZone = zone.timeZone;
+    	zoneToSave.offset = zone.offset;
     	zoneToSave.name = zone.name;
     	zoneToSave.city = zone.city;
     	zoneToSave.userId = zone.userId;
@@ -78,8 +89,9 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     		zone.newZone = false;
     	} else {
     		zoneToSave.id = getId(zone);
-    		TimeZone.update({ id:zoneToSave.id }, zoneToSave, function() {
+    		TimeZone.update({ id:zoneToSave.id }, zoneToSave, function(value) {
     			console.log('updated zone sucess');
+    			$scope.zones[index] = value;
     		}, function () {
     			console.log('updated zone error');
     		});
