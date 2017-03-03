@@ -3,6 +3,18 @@
 
 	<p>Current user: {{currentUser.name}}</p>
 	
+	<div>
+		<label for="byName">User Name:</label>
+        <input id="byName" type="text" ng-model="byName">
+    </div>
+
+	<br>
+	
+	<button type="button" ng-click="searchUsers()" class="btn btn-sm btn-success">
+		<i class="glyphicon glyphicon-search">
+		</i> Search
+	</button>
+	
 	<button type="button" ng-click="addUser()" class="btn btn-sm btn-success">
 		<i class="glyphicon glyphicon-plus">
 		</i> Add User

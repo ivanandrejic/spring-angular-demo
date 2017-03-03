@@ -7,6 +7,31 @@ app.controller('users', ['$rootScope', '$scope', '$http', '$resource', 'User', f
 		}
 	});
 	
+//	$scope.searchUsers = function searchUsers() {
+//		
+//		if ($rootScope.currentUser) {
+//			console.log('current user: ' + JSON.stringify($rootScope.currentUser));
+//			
+//			if ($scope.byName) {			
+//				var UserZones = $resource(getNameUrl(), { name: $scope.byName });
+//			} else {			
+//				var UserZones = $resource(getAllUrl(), { userId: $rootScope.currentUser.id });
+//			}
+//			
+//			var allZones = UserZones.get(null, function () {
+//				$scope.zones = allZones._embedded.timeZones;
+//			});
+//		}
+//	}
+//	
+//	function getNameUrl() {
+//		return '/rest/timeZones/search/name?name=:name';
+//	}
+//	
+//	function getAllUrl() {
+//		return isAdmin() ? '/rest/timeZones/': '/rest/timeZones/search/userId?userId=:userId';
+//	}
+	
     $scope.addUser = function addUser() {
         $scope.users.push({
         	'name' : '',

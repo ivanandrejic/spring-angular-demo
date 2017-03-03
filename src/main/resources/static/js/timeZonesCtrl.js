@@ -7,15 +7,9 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
 			console.log('current user: ' + JSON.stringify($rootScope.currentUser));
 			
 			if ($scope.byName) {			
-				var UserZones = $resource(getDateUrl(), 
-					{
-						userId: $rootScope.currentUser.id, 
-						from: $scope.fromDate.toISOString().slice(0, 10),
-						to: $scope.toDate.toISOString().slice(0, 10)
-					}
-				);
+				var UserZones = $resource(getNameUrl(), { name: $scope.byName });
 			} else {			
-				var UserZones = $resource(getAllUrl(), {userId:$rootScope.currentUser.id});
+				var UserZones = $resource(getAllUrl(), { userId: $rootScope.currentUser.id });
 			}
 			
 			var allZones = UserZones.get(null, function () {
@@ -24,14 +18,12 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
 		}
 	}	
 	
-	function getDateUrl() {
-		return isAdmin() ? '/rest/timeZones/search/date?from=:from&to=:to': 
-			'/rest/timeZones/search/userAndDate?userId=:userId&from=:from&to=:to';
+	function getNameUrl() {
+		return '/rest/timeZones/search/name?name=:name';
 	}
 	
 	function getAllUrl() {
-		return isAdmin() ? '/rest/timeZones/': 
-			'/rest/timeZones/search/userId?userId=:userId';
+		return isAdmin() ? '/rest/timeZones/': '/rest/timeZones/search/userId?userId=:userId';
 	}
 	
 	function isAdmin() {
