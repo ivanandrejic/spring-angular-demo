@@ -7,30 +7,33 @@ app.controller('users', ['$rootScope', '$scope', '$http', '$resource', 'User', f
 		}
 	});
 	
-//	$scope.searchUsers = function searchUsers() {
-//		
-//		if ($rootScope.currentUser) {
-//			console.log('current user: ' + JSON.stringify($rootScope.currentUser));
-//			
-//			if ($scope.byName) {			
-//				var UserZones = $resource(getNameUrl(), { name: $scope.byName });
-//			} else {			
-//				var UserZones = $resource(getAllUrl(), { userId: $rootScope.currentUser.id });
-//			}
-//			
-//			var allZones = UserZones.get(null, function () {
-//				$scope.zones = allZones._embedded.timeZones;
-//			});
-//		}
-//	}
-//	
-//	function getNameUrl() {
-//		return '/rest/timeZones/search/name?name=:name';
-//	}
-//	
-//	function getAllUrl() {
-//		return isAdmin() ? '/rest/timeZones/': '/rest/timeZones/search/userId?userId=:userId';
-//	}
+	$scope.searchUsers = function searchUsers() {
+		
+		if ($rootScope.currentUser) {
+			console.log('current user: ' + JSON.stringify($rootScope.currentUser));
+			
+			if ($scope.byName) {			
+				var User = $resource(getNameUrl(), { name: $scope.byName });
+				var users = User.get(null, function () {
+					console.debug('users: ' + users);
+					$scope.users = users.name ? [users] : [];
+				});
+			} else {			
+				var User = $resource(getAllUrl());
+				var users = User.get(null, function () {
+					$scope.users = users._embedded.secureUsers;
+				});
+			}
+		}
+	}
+	
+	function getNameUrl() {
+		return '/rest/users/search/name/:name';
+	}
+	
+	function getAllUrl() {
+		return '/rest/users/';
+	}
 	
     $scope.addUser = function addUser() {
         $scope.users.push({

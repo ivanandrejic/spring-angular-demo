@@ -3,7 +3,6 @@ package com.toptal.demo.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toptal.demo.domain.SecureUser;
-import com.toptal.demo.domain.TimeZone;
 import com.toptal.demo.repo.SecureUserRepository;
 import com.toptal.demo.repo.TimeZoneRepository;
 
@@ -53,6 +52,24 @@ public class UserController {
 		resources.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(UserController.class).getAll(principal)).withSelfRel());
 		
 		return ResponseEntity.ok(resources);
+    }
+	
+	@RequestMapping(value = "/search/name/{name}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER_MANAGER')")
+	@PostAuthorize("returnObject.getBody() == null || (returnObject.getBody().getContent().role != 'ROLE_ADMIN' && hasRole('ROLE_USER_MANAGER')) || hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> findByName(@PathVariable String name) {
+		SecureUser user = secureUserRepo.findByName(name);
+		
+		ResponseEntity<?> result; 
+		if (user == null) {
+			result = ResponseEntity.ok(null);
+		} else {			
+			Resource<SecureUser> resource = new Resource<SecureUser>(user);
+			resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(UserController.class).findByName(name)).withSelfRel());
+			result = ResponseEntity.ok(resource);
+		}
+		
+		return result;
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
