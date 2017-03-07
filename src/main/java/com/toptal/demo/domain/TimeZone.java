@@ -1,7 +1,5 @@
 package com.toptal.demo.domain;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +16,6 @@ public class TimeZone {
 	
 	private @Id @GeneratedValue Long id;
 	
-	@Column(name="TIME_ZONE")
-//	@NotNull
-	private Date timeZone;
-	
 	@Column(name="ZONE_OFFSET")
 	@NotNull @Min(-12) @Max(+14)
 	private Integer offset;
@@ -37,14 +31,6 @@ public class TimeZone {
 //	@JoinColumn(name="USER_ID")
 	@Column(name="USER_ID")
 	private Long userId;
-
-	public Date getTimeZone() {
-		return timeZone;
-	}
-
-	public void setTimeZone(Date timeZone) {
-		this.timeZone = timeZone;
-	}
 	
 	public Integer getOffset() {
 		return offset;
