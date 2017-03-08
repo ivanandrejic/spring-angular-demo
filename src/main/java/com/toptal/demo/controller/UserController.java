@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toptal.demo.domain.SecureUser;
 import com.toptal.demo.repo.SecureUserRepository;
-import com.toptal.demo.repo.TimeZoneRepository;
 
 @RepositoryRestController
 @RequestMapping("/rest/users")
@@ -33,8 +32,8 @@ public class UserController {
 	@Autowired
 	private SecureUserRepository secureUserRepo;
 	
-	@Autowired
-	private TimeZoneRepository timeZoneRepo;
+//	@Autowired
+//	private TimeZoneRepository timeZoneRepo;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER_MANAGER')")

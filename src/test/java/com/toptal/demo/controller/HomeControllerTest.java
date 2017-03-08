@@ -27,7 +27,7 @@ public class HomeControllerTest {
 
     @Test
     public void testLogin() throws Exception {
-    	mockMvc.perform(get("/user").with(httpBasic("admin", "toptal")))
+    	mockMvc.perform(get("/user").secure(true).with(httpBasic("admin", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().json("{\"role\":\"ROLE_ADMIN\"}"))

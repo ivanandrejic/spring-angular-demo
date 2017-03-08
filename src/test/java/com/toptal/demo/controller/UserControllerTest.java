@@ -29,7 +29,7 @@ public class UserControllerTest {
 //**********************************************************
     @Test
     public void testGetAllAdmin() throws Exception {
-    	mockMvc.perform(get("/rest/users").with(httpBasic("admin", "toptal")))
+    	mockMvc.perform(get("/rest/users").secure(true).with(httpBasic("admin", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -37,7 +37,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetAllManager() throws Exception {
-    	mockMvc.perform(get("/rest/users").with(httpBasic("manager", "toptal")))
+    	mockMvc.perform(get("/rest/users").secure(true).with(httpBasic("manager", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -45,7 +45,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetAllUser() throws Exception {
-    	mockMvc.perform(get("/rest/users").with(httpBasic("user", "toptal")))
+    	mockMvc.perform(get("/rest/users").secure(true).with(httpBasic("user", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
@@ -56,7 +56,7 @@ public class UserControllerTest {
 //**********************************************************
     @Test
     public void testGetCurrentAdmin() throws Exception {
-    	mockMvc.perform(get("/rest/users/1").with(httpBasic("admin", "toptal")))
+    	mockMvc.perform(get("/rest/users/1").secure(true).with(httpBasic("admin", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -64,7 +64,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetOtherAdmin() throws Exception {
-    	mockMvc.perform(get("/rest/users/4").with(httpBasic("admin", "toptal")))
+    	mockMvc.perform(get("/rest/users/4").secure(true).with(httpBasic("admin", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -72,7 +72,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetNoneAdmin() throws Exception {
-    	mockMvc.perform(get("/rest/users/42").with(httpBasic("admin", "toptal")))
+    	mockMvc.perform(get("/rest/users/42").secure(true).with(httpBasic("admin", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
@@ -83,7 +83,7 @@ public class UserControllerTest {
 //**********************************************************
     @Test
     public void testGetCurrentManager() throws Exception {
-    	mockMvc.perform(get("/rest/users/3").with(httpBasic("manager", "toptal")))
+    	mockMvc.perform(get("/rest/users/3").secure(true).with(httpBasic("manager", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -91,7 +91,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetAdminManager() throws Exception {
-    	mockMvc.perform(get("/rest/users/1").with(httpBasic("manager", "toptal")))
+    	mockMvc.perform(get("/rest/users/1").secure(true).with(httpBasic("manager", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
@@ -99,7 +99,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetOtherManager() throws Exception {
-    	mockMvc.perform(get("/rest/users/4").with(httpBasic("manager", "toptal")))
+    	mockMvc.perform(get("/rest/users/4").secure(true).with(httpBasic("manager", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -107,7 +107,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetNoneManager() throws Exception {
-    	mockMvc.perform(get("/rest/users/42").with(httpBasic("manager", "toptal")))
+    	mockMvc.perform(get("/rest/users/42").secure(true).with(httpBasic("manager", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
@@ -118,7 +118,7 @@ public class UserControllerTest {
 //**********************************************************
     @Test
     public void testGetCurrentUser() throws Exception {
-    	mockMvc.perform(get("/rest/users/4").with(httpBasic("user", "toptal")))
+    	mockMvc.perform(get("/rest/users/4").secure(true).with(httpBasic("user", "toptal")))
 			.andDo(print())
 			.andExpect(status().isOk())
 		;
@@ -126,7 +126,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetAdminUser() throws Exception {
-    	mockMvc.perform(get("/rest/users/1").with(httpBasic("user", "toptal")))
+    	mockMvc.perform(get("/rest/users/1").secure(true).with(httpBasic("user", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
@@ -134,7 +134,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetOtherUser() throws Exception {
-    	mockMvc.perform(get("/rest/users/3").with(httpBasic("user", "toptal")))
+    	mockMvc.perform(get("/rest/users/3").secure(true).with(httpBasic("user", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
@@ -142,7 +142,7 @@ public class UserControllerTest {
     
     @Test
     public void testGetNoneUser() throws Exception {
-    	mockMvc.perform(get("/rest/users/42").with(httpBasic("user", "toptal")))
+    	mockMvc.perform(get("/rest/users/42").secure(true).with(httpBasic("user", "toptal")))
 			.andDo(print())
 			.andExpect(status().is4xxClientError())
 		;
