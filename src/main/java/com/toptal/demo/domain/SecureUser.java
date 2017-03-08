@@ -28,6 +28,7 @@ public class SecureUser {
 	
 	private String password;
 
+	@Column(name = "NAME", unique = true)
 	@Size(min=4, max=30) 
 	private String name;
 	
