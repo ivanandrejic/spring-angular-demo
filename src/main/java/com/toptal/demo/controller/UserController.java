@@ -32,9 +32,6 @@ public class UserController {
 	@Autowired
 	private SecureUserRepository secureUserRepo;
 	
-//	@Autowired
-//	private TimeZoneRepository timeZoneRepo;
-	
 	@RequestMapping(method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER_MANAGER')")
     public ResponseEntity<?> getAll(Principal principal) {
@@ -146,17 +143,6 @@ public class UserController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public @ResponseBody void delete(@PathVariable Long id) {
 		SecureUser oldUser = secureUserRepo.findOne(id);
-		
-//		TODO remove zones
-//		List<TimeZone> byUserId = timeZoneRepo.findByUserId(id);
-//		byUserId.stream().forEach(new Consumer<TimeZone>() {
-//
-//			@Override
-//			public void accept(TimeZone zone) {
-//				timeZoneRepo.delete(zone);
-//			}
-//		});
-		
 		secureUserRepo.delete(oldUser);
     }
 

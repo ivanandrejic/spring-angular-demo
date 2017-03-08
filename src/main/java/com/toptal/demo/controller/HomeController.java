@@ -18,9 +18,7 @@ public class HomeController {
 
 	@RequestMapping("/user")
 	public ResponseEntity<?> user(Principal principal) {
-		
 		SecureUser user = userRepo.findByName(principal.getName());
-		
 		return ResponseEntity.ok(user != null ? user : principal);
 	}
 
