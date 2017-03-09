@@ -1,6 +1,10 @@
 <h1>Time Zones</h1>
 <div ng-show="authenticated">
 
+	<div class="alert alert-danger" ng-show="error">
+		There was a problem.
+	</div>
+
 	<h4>Current user: {{currentUser.name}}</h4>
 	
 	<div>

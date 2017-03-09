@@ -77,6 +77,9 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     		TimeZone.save(null, zoneToSave, function(value) {
     			console.log('saved zone: ' + value)
     			$scope.zones[index] = value;
+    		}, function () {
+    			console.log('save zone error');
+    			$scope.error = true;
     		});
     		zone.newZone = false;
     	} else {
@@ -86,6 +89,7 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     			$scope.zones[index] = value;
     		}, function () {
     			console.log('updated zone error');
+    			$scope.error = true;
     		});
     		
     	}
@@ -106,4 +110,5 @@ app.controller('timeZones', ['$rootScope', '$scope', '$resource', 'TimeZone', 'a
     }
 	
 	$scope.zones = [];
+	$scope.error = false;
 }]);

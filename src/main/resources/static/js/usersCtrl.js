@@ -67,6 +67,9 @@ app.controller('users', ['$rootScope', '$scope', '$http', '$resource', 'User', f
     		userToSave.$save(null, function(value) {
     			console.log('saved user: ' + value.name)
     			$scope.users[index] = value;
+    		}, function () {
+    			console.log('saved user error');
+    			$scope.error = true;
     		});
     		user.newUser = false;
     	} else {
@@ -90,4 +93,5 @@ app.controller('users', ['$rootScope', '$scope', '$http', '$resource', 'User', f
     }
 	
 	$scope.users = [];
+	$scope.error = false;
 }]);

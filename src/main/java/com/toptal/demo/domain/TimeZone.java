@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class TimeZone {
 	
 	@Column(name="NAME")
 	@NotNull
+	@Size(min=2, max=30)
 	private String name;
 	
 	@Column(name="CITY")
