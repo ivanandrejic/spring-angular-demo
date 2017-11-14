@@ -1,4 +1,4 @@
-var app = angular.module('toptal-demo', [ 'ngRoute', 'hateoas', 'smart-table']);
+var app = angular.module('demo', [ 'ngRoute', 'hateoas', 'smart-table']);
 
 app.config(function($routeProvider, $httpProvider) {
 
